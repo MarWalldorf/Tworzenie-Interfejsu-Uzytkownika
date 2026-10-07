@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Jednoznaczny Test Wiedzy IT</title>
+</head>
+<body bgcolor="#FAFAFA">
+
+    <!-- Nawigacja powrotna -->
+    <p>
+        <a href="../start.html">&larr; Wróć do strony startowej</a>
+    </p>
+
+    <hr>
+
+    <h1>Test wiedzy: Sprzęt i technologie komputerowe</h1>
+    <p>Udziel odpowiedzi na pytania. Formularz domyślnie wysyła dane metodą <b>GET</b> do serwisu <code>httpbin.org</code>.</p>
+
+    <form action="https://httpbin.org/get" method="get">
+
+        <table border="1" cellpadding="8" cellspacing="0" width="850">
+            <tr bgcolor="#E2E2E2">
+                <th width="50" align="center">Lp.</th>
+                <th align="left">Pytanie i pole odpowiedzi</th>
+            </tr>
+
+            <!-- 1. Pytanie otwarte: pole tekstowe (odpowiedź: jedno słowo) -->
+            <tr>
+                <td align="center"><b>1</b></td>
+                <td>
+                    <label for="pyt1"><b>Podaj nazwę firmy produkującej procesory Ryzen:</b></label><br><br>
+                    <input type="text" id="pyt1" name="pyt1" size="25" placeholder="Wpisz jedno słowo...">
+                </td>
+            </tr>
+
+            <!-- 2. Pytanie otwarte: obszar tekstowy (odpowiedź: jedno słowo) -->
+            <tr>
+                <td align="center"><b>2</b></td>
+                <td>
+                    <label for="pyt2"><b>Wpisz skrót nazwy pamięci operacyjnej o dostępie swobodnym:</b></label><br><br>
+                    <textarea id="pyt2" name="pyt2" rows="2" cols="25" placeholder="Wpisz skrót..."></textarea>
+                </td>
+            </tr>
+
+            <!-- 3. Pytanie jednokrotnego wyboru: lista rozwijana (select bez size) -->
+            <tr>
+                <td align="center"><b>3</b></td>
+                <td>
+                    <label for="pyt3"><b>Jaki program uruchamia system operacyjny zaraz po włączeniu płyty głównej komputera?</b></label><br><br>
+                    <select id="pyt3" name="pyt3">
+                        <option value="" disabled selected>-- Wybierz odpowiedź --</option>
+                        <option value="odp1">UEFI</option>
+                        <option value="odp2">Word</option>
+                        <option value="odp3">Kompilator</option>
+                        <option value="odp4">Sterownik</option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- 4. Pytanie jednokrotnego wyboru: lista rozwinięta (select z size > 1) -->
+            <tr>
+                <td align="center"><b>4</b></td>
+                <td>
+                    <label for="pyt4"><b>Wskaż protokół zapewniający szyfrowane połączenie ze stronami WWW:</b></label><br><br>
+                    <select id="pyt4" name="pyt4" size="4">
+                        <option value="odp1">HTTPS</option>
+                        <option value="odp2">HTTP</option>
+                        <option value="odp3">FTP</option>
+                        <option value="odp4">TELNET</option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- 5. Pytanie jednokrotnego wyboru: opcje radio (bez grafiki) -->
+            <tr>
+                <td align="center"><b>5</b></td>
+                <td>
+                    <b>Wskaż symetryczny standard złącza w nowoczesnych laptopach i smartfonach:</b><br><br>
+                    <input type="radio" id="pyt5_odp1" name="pyt5" value="odp1">
+                    <label for="pyt5_odp1">USB-C</label><br>
+
+                    <input type="radio" id="pyt5_odp2" name="pyt5" value="odp2">
+                    <label for="pyt5_odp2">VGA</label><br>
+
+                    <input type="radio" id="pyt5_odp3" name="pyt5" value="odp3">
+                    <label for="pyt5_odp3">DVI</label><br>
+
+                    <input type="radio" id="pyt5_odp4" name="pyt5" value="odp4">
+                    <label for="pyt5_odp4">PS/2</label>
+                </td>
+            </tr>
+
+            <!-- 6. Pytanie wielokrotnego wyboru: lista rozwinięta (multiple + size) -->
+            <tr>
+                <td align="center"><b>6</b></td>
+                <td>
+                    <label for="pyt6"><b>Zaznacz wszystkie technologie matryc ekranowych (Ctrl + klik):</b></label><br><br>
+                    <select id="pyt6" name="pyt6" size="4" multiple>
+                        <option value="odp1">OLED</option>
+                        <option value="odp2">IPS</option>
+                        <option value="odp3">SATA</option>
+                        <option value="odp4">PCIe</option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- 7. Pytanie wielokrotnego wyboru: checkboxy o RÓŻNYCH nazwach -->
+            <tr>
+                <td align="center"><b>7</b></td>
+                <td>
+                    <b>Zaznacz podzespoły będące pamięcią masową (checkboxy o różnych nazwach):</b><br><br>
+                    <input type="checkbox" id="pyt7_odp1" name="pyt7_odp1" value="odp1">
+                    <label for="pyt7_odp1">SSD</label><br>
+
+                    <input type="checkbox" id="pyt7_odp2" name="pyt7_odp2" value="odp2">
+                    <label for="pyt7_odp2">HDD</label><br>
+
+                    <input type="checkbox" id="pyt7_odp3" name="pyt7_odp3" value="odp3">
+                    <label for="pyt7_odp3">Zasilacz</label><br>
+
+                    <input type="checkbox" id="pyt7_odp4" name="pyt7_odp4" value="odp4">
+                    <label for="pyt7_odp4">Radiator</label>
+                </td>
+            </tr>
+
+            <!-- 8. Pytanie wielokrotnego wyboru: checkboxy o TEJ SAMEJ nazwie -->
+            <tr>
+                <td align="center"><b>8</b></td>
+                <td>
+                    <b>Zaznacz bezprzewodowe standardy łączności (checkboxy o tej samej nazwie):</b><br><br>
+                    <input type="checkbox" id="pyt8_odp1" name="pyt8" value="odp1">
+                    <label for="pyt8_odp1">Wi-Fi</label><br>
+
+                    <input type="checkbox" id="pyt8_odp2" name="pyt8" value="odp2">
+                    <label for="pyt8_odp2">Bluetooth</label><br>
+
+                    <input type="checkbox" id="pyt8_odp3" name="pyt8" value="odp3">
+                    <label for="pyt8_odp3">Ethernet</label><br>
+
+                    <input type="checkbox" id="pyt8_odp4" name="pyt8" value="odp4">
+                    <label for="pyt8_odp4">HDMI</label>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <!-- Przyciski wysyłania testu -->
+        <input type="submit" value="Wyślij test (GET -> httpbin.org/get)">
+        &nbsp;&nbsp;
+        <input type="submit" value="Wyślij test (POST -> httpbin.org/post)"
+               formaction="https://httpbin.org/post"
+               formmethod="post">
+
+    </form>
+
+    <hr>
+    <p>
+        <a href="../start.html">Powrót do strony startowej</a>
+    </p>
+
+</body>
+</html>

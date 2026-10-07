@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wyszukiwarka Laptopów</title>
+</head>
+<body bgcolor="#F9F9F9">
+
+    <p>
+        <a href="../start.html">&larr; Wróć do strony startowej</a>
+    </p>
+
+    <hr>
+
+    <h1>Wyszukiwarka Laptopów w serwisie Allegro</h1>
+
+
+    <form action="https://allegro.pl/listing" method="get" target="_blank">
+        <fieldset style="width: 350px;">
+            <legend><b>Wybierz kategorię / model:</b></legend>
+            <p>
+                <input type="radio" id="laptop1" name="string" value="Lenovo ThinkPad" checked>
+                <label for="laptop1">Lenovo ThinkPad</label>
+            </p>
+            <p>
+                <input type="radio" id="laptop2" name="string" value="ASUS ROG Gaming">
+                <label for="laptop2">ASUS ROG Gaming</label>
+            </p>
+            <p>
+                <input type="radio" id="laptop3" name="string" value="Dell XPS 13">
+                <label for="laptop3">Dell XPS 13</label>
+            </p>
+            <p>
+                <input type="radio" id="laptop4" name="string" value="Apple MacBook Pro">
+                <label for="laptop4">Apple MacBook Pro</label>
+            </p>
+            <p>
+                <input type="submit" value="Szukaj na Allegro">
+            </p>
+        </fieldset>
+    </form>
+
+    <hr>
+
+    <h3> Wyszukiwanie konkretnego hasła:</h3>
+    <p>
+        Szukaj bezpośrednio:
+        <a href="https://allegro.pl/listing?string=Apple+MacBook+Air+M2" target="_blank">
+            Kup MacBook Air M2 na Allegro
+        </a>
+    </p>
+
+    <hr>
+
+
+</body>
+</html>
