@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Strona Niebieska</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASJC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+<body style="background-color: #e3f2fd; min-height: 100vh;">
+
+    <div w3-include-html="menu.html"></div>
+
+    <div class="container my-5">
+        <h1 class="text-primary mb-4">
+            <i class="bi bi-info-circle-fill me-2"></i>Strona Niebieska
+        </h1>
+        <p class="lead">Strona prezentująca spójność nawigacji oraz dodatkowe komponenty biblioteki Bootstrap 5.</p>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="bi bi-box-arrow-in-right me-2"></i>Nawigacja w3-include-html</h5>
+                        <p class="card-text">Menu górne jest fizycznie zapisane w osobnym pliku <code>menu.html</code> i wstrzykiwane asynchronicznie przez bibliotekę <code>w3.js</code>, co ułatwia zarządzanie kodem witryny.</p>
+                        <a href="czerwona.html" class="btn btn-outline-danger btn-sm"><i class="bi bi-arrow-left me-1"></i>Idź do Czerwonej</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm border-success">
+                    <div class="card-body">
+                        <h5 class="card-title text-success"><i class="bi bi-phone me-2"></i>Responsywność</h5>
+                        <p class="card-text">Dzięki klasom <code>col-md-*</code> układ dostosowuje się płynnie do wielkości okna i ekranu urządzeń mobilnych oraz tabletów.</p>
+                        <a href="zielona.html" class="btn btn-outline-success btn-sm">Idź do Zielonej<i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+        w3.includeHTML();
+    </script>
+</body>
+</html>

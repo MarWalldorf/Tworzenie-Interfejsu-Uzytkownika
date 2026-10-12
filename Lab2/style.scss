@@ -1,0 +1,77 @@
+﻿$najasno: true;
+
+@mixin tlo-skoroszyt($jasno) {
+    @if $jasno == true {
+        background-color: #ffffff;
+        background-image: linear-gradient(to right, #d0d7de 1px, transparent 1px), linear-gradient(to bottom, #d0d7de 1px, transparent 1px);
+        color: #000000;
+    }
+    @else {
+        background-color: #1e1e1e;
+        background-image: linear-gradient(to right, #333333 1px, transparent 1px), linear-gradient(to bottom, #333333 1px, transparent 1px);
+        color: #e0e0e0;
+    }
+}
+
+@mixin linki($jasno) {
+    @if $jasno == true {
+        color: #000000;
+
+        &:hover {
+            color: #ff6600;
+        }
+    }
+    @else {
+        color: #4da6ff;
+
+        &:hover {
+            color: #ffaa00;
+        }
+    }
+}
+
+@mixin pola-edycyjne($jasno) {
+    @if $jasno == true {
+        background-color: #e0e0e0;
+        border: 1px solid #777777;
+        color: #000000;
+
+        &:focus {
+            background-color: #ffff99;
+            border-color: #ff9900;
+        }
+    }
+    @else {
+        background-color: #2d2d2d;
+        border: 1px solid #555555;
+        color: #ffffff;
+
+        &:focus {
+            background-color: #444400;
+            border-color: #ffaa00;
+        }
+    }
+}
+
+body {
+    @include tlo-skoroszyt($najasno);
+    background-size: 20px 20px;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+a {
+    text-decoration: none;
+    @include linki($najasno);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+input[type="text"],
+textarea {
+    padding: 6px;
+    outline: none;
+    @include pola-edycyjne($najasno);
+}
