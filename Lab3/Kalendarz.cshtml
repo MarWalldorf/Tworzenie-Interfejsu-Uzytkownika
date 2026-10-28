@@ -1,0 +1,41 @@
+﻿@page
+@{
+    DateTime dzis = DateTime.Now;
+    int dzisiejszyDzien = dzis.Day;
+
+    var kultura = new System.Globalization.CultureInfo("pl-PL");
+    string sformatowanaData = dzis.ToString("d MMMM yyyy", kultura);
+
+    int licznik = 1;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Zadanie 1 - Tabela dni</title>
+</head>
+<body>
+
+    <p>@sformatowanaData</p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        @for (int i = 0; i < 6; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 5; j++)
+                {
+                    string kolorTla = (licznik == dzisiejszyDzien) ? "blue" : "yellow";
+
+                    <td bgcolor="@kolorTla" style="text-align: center;">
+                        @licznik
+                    </td>
+
+                    licznik++;
+                }
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

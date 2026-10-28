@@ -1,0 +1,261 @@
+﻿@page
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Wiedzy IT - Wyniki</title>
+</head>
+<body>
+
+    <p>
+        <a href="start.html">&larr; Wróć do strony startowej</a>
+    </p>
+
+    <hr>
+
+    <h1>Test wiedzy: Sprzęt i technologie komputerowe</h1>
+
+    <form method="post">
+
+        <table border="1" cellpadding="8" cellspacing="0" width="850">
+            <tr bgcolor="#E2E2E2">
+                <th width="50" align="center">Lp.</th>
+                <th align="left">Pytanie i pole odpowiedzi</th>
+            </tr>
+
+            <tr>
+                <td align="center"><b>1</b></td>
+                <td>
+                    <label for="pyt1"><b>Podaj nazwę firmy produkującej procesory Ryzen:</b></label><br><br>
+                    <input type="text" id="pyt1" name="pyt1" size="25" placeholder="Wpisz jedno słowo...">
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>2</b></td>
+                <td>
+                    <label for="pyt2"><b>Wpisz skrót nazwy pamięci operacyjnej o dostępie swobodnym:</b></label><br><br>
+                    <textarea id="pyt2" name="pyt2" rows="2" cols="25" placeholder="Wpisz skrót..."></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>3</b></td>
+                <td>
+                    <label for="pyt3"><b>Jaki program uruchamia system operacyjny zaraz po włączeniu płyty głównej komputera?</b></label><br><br>
+                    <select id="pyt3" name="pyt3">
+                        <option value="" disabled selected>-- Wybierz odpowiedź --</option>
+                        <option value="odp1">UEFI</option>
+                        <option value="odp2">Word</option>
+                        <option value="odp3">Kompilator</option>
+                        <option value="odp4">Sterownik</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>4</b></td>
+                <td>
+                    <label for="pyt4"><b>Wskaż protokół zapewniający szyfrowane połączenie ze stronami WWW:</b></label><br><br>
+                    <select id="pyt4" name="pyt4" size="4">
+                        <option value="odp1">HTTPS</option>
+                        <option value="odp2">HTTP</option>
+                        <option value="odp3">FTP</option>
+                        <option value="odp4">TELNET</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>5</b></td>
+                <td>
+                    <b>Wskaż symetryczny standard złącza w nowoczesnych laptopach i smartfonach:</b><br><br>
+                    <input type="radio" id="pyt5_odp1" name="pyt5" value="odp1">
+                    <label for="pyt5_odp1">USB-C</label><br>
+
+                    <input type="radio" id="pyt5_odp2" name="pyt5" value="odp2">
+                    <label for="pyt5_odp2">VGA</label><br>
+
+                    <input type="radio" id="pyt5_odp3" name="pyt5" value="odp3">
+                    <label for="pyt5_odp3">DVI</label><br>
+
+                    <input type="radio" id="pyt5_odp4" name="pyt5" value="odp4">
+                    <label for="pyt5_odp4">PS/2</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>6</b></td>
+                <td>
+                    <label for="pyt6"><b>Zaznacz wszystkie technologie matryc ekranowych (Ctrl + klik):</b></label><br><br>
+                    <select id="pyt6" name="pyt6" size="4" multiple>
+                        <option value="odp1">OLED</option>
+                        <option value="odp2">IPS</option>
+                        <option value="odp3">SATA</option>
+                        <option value="odp4">PCIe</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>7</b></td>
+                <td>
+                    <b>Zaznacz podzespoły będące pamięcią masową (checkboxy o różnych nazwach):</b><br><br>
+                    <input type="checkbox" id="pyt7_odp1" name="pyt7_odp1" value="odp1">
+                    <label for="pyt7_odp1">SSD</label><br>
+
+                    <input type="checkbox" id="pyt7_odp2" name="pyt7_odp2" value="odp2">
+                    <label for="pyt7_odp2">HDD</label><br>
+
+                    <input type="checkbox" id="pyt7_odp3" name="pyt7_odp3" value="odp3">
+                    <label for="pyt7_odp3">Zasilacz</label><br>
+
+                    <input type="checkbox" id="pyt7_odp4" name="pyt7_odp4" value="odp4">
+                    <label for="pyt7_odp4">Radiator</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>8</b></td>
+                <td>
+                    <b>Zaznacz bezprzewodowe standardy łączności (checkboxy o tej samej nazwie):</b><br><br>
+                    <input type="checkbox" id="pyt8_odp1" name="pyt8" value="odp1">
+                    <label for="pyt8_odp1">Wi-Fi</label><br>
+
+                    <input type="checkbox" id="pyt8_odp2" name="pyt8" value="odp2">
+                    <label for="pyt8_odp2">Bluetooth</label><br>
+
+                    <input type="checkbox" id="pyt8_odp3" name="pyt8" value="odp3">
+                    <label for="pyt8_odp3">Ethernet</label><br>
+
+                    <input type="checkbox" id="pyt8_odp4" name="pyt8" value="odp4">
+                    <label for="pyt8_odp4">HDMI</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td align="center"><b>9</b></td>
+                <td>
+                    <label for="pyt9"><b>Co przedstawia poniższy obrazek?</b></label><br><br>
+                    <img src="../Grafika/obrazek.jpg" alt="Grafika pomocnicza" width="250" border="1"><br><br>
+                    <input type="text" id="pyt9" name="pyt9" size="30" placeholder="Wpisz jedno słowo...">
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <input type="submit" value="Zakończ test i sprawdź wynik">
+
+    </form>
+
+    <br>
+    <hr>
+
+    @{
+        if (Request.HasFormContentType && Request.Form.Count > 0)
+        {
+            int punkty = 0;
+            int maxPunktow = 9;
+
+            string odp1 = Request.Form["pyt1"].ToString().Trim();
+            if (odp1.Equals("AMD", StringComparison.OrdinalIgnoreCase))
+            {
+                punkty++;
+            }
+
+            string odp2 = Request.Form["pyt2"].ToString().Trim();
+            if (odp2.Equals("RAM", StringComparison.OrdinalIgnoreCase))
+            {
+                punkty++;
+            }
+
+            string odp3 = Request.Form["pyt3"].ToString();
+            if (odp3 == "odp1")
+            {
+                punkty++;
+            }
+
+            string odp4 = Request.Form["pyt4"].ToString();
+            if (odp4 == "odp1")
+            {
+                punkty++;
+            }
+
+            string odp5 = Request.Form["pyt5"].ToString();
+            if (odp5 == "odp1")
+            {
+                punkty++;
+            }
+
+            var odp6 = Request.Form["pyt6"];
+            if (odp6.Contains("odp1") && odp6.Contains("odp2") && !odp6.Contains("odp3") && !odp6.Contains("odp4"))
+            {
+                punkty++;
+            }
+
+            bool check7_1 = Request.Form.ContainsKey("pyt7_odp1");
+            bool check7_2 = Request.Form.ContainsKey("pyt7_odp2");
+            bool check7_3 = Request.Form.ContainsKey("pyt7_odp3");
+            bool check7_4 = Request.Form.ContainsKey("pyt7_odp4");
+
+            if (check7_1 && check7_2 && !check7_3 && !check7_4)
+            {
+                punkty++;
+            }
+
+            var odp8 = Request.Form["pyt8"];
+            if (odp8.Contains("odp1") && odp8.Contains("odp2") && !odp8.Contains("odp3") && !odp8.Contains("odp4"))
+            {
+                punkty++;
+            }
+
+            string odp9 = Request.Form["pyt9"].ToString().Trim().ToLower();
+            if (odp9 == "papugę")
+            {
+                punkty++;
+            }
+
+            double procent = ((double)punkty / maxPunktow) * 100.0;
+            string ocena = "2.0 (niedostateczny)";
+
+            if (procent >= 90)
+            {
+                ocena = "5.0 (bardzo dobry)";
+            }
+            else if (procent >= 80)
+            {
+                ocena = "4.5 (dobry plus)";
+            }
+            else if (procent >= 70)
+            {
+                ocena = "4.0 (dobry)";
+            }
+            else if (procent >= 60)
+            {
+                ocena = "3.5 (dostateczny plus)";
+            }
+            else if (procent >= 50)
+            {
+                ocena = "3.0 (dostateczny)";
+            }
+
+            <h2>Wyniki testu:</h2>
+            <table border="1" cellpadding="6" cellspacing="0">
+                <tr>
+                    <td><b>Zdobyte punkty:</b></td>
+                    <td>@punkty / @maxPunktow</td>
+                </tr>
+                <tr>
+                    <td><b>Wynik procentowy:</b></td>
+                    <td>@procent.ToString("F1")%</td>
+                </tr>
+                <tr>
+                    <td><b>Wystawiona ocena:</b></td>
+                    <td><b>@ocena</b></td>
+                </tr>
+            </table>
+        }
+    }
+
+</body>
+</html>

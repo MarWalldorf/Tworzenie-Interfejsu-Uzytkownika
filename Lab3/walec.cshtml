@@ -1,0 +1,120 @@
+﻿@page
+@using System.Text.RegularExpressions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Obliczenia brył</title>
+</head>
+<body>
+
+    <h2>Kalkulator brył</h2>
+
+    <form method="get">
+        Wysokość (h):
+        <input type="text" name="wys" value="@Request.Query["wys"]" /><br /><br />
+
+        Promień (r):
+        <input type="text" name="prom" value="@Request.Query["prom"]" /><br /><br />
+
+        Rodzaj bryły:<br />
+        <input type="radio" id="walec" name="bryla" value="walec" @(Request.Query["bryla"] != "stozek" && Request.Query["bryla"] != "podwojny_stozek" ? "checked" : "") />
+        <label for="walec">Walec</label><br />
+
+        <input type="radio" id="stozek" name="bryla" value="stozek" @(Request.Query["bryla"] == "stozek" ? "checked" : "") />
+        <label for="stozek">Stożek</label><br />
+
+        <input type="radio" id="podwojny_stozek" name="bryla" value="podwojny_stozek" @(Request.Query["bryla"] == "podwojny_stozek" ? "checked" : "") />
+        <label for="podwojny_stozek">Podwójny stożek</label><br /><br />
+
+        <input type="submit" value="Oblicz" />
+    </form>
+
+    <br />
+
+    @{
+        if (Request.Query.ContainsKey("wys") && Request.Query.ContainsKey("prom"))
+        {
+            string strWys = Request.Query["wys"].ToString();
+            string strProm = Request.Query["prom"].ToString();
+            string bryla = Request.Query["bryla"].ToString();
+
+            Regex regexLiczbaCalkowita = new Regex(@"^\d+$");
+
+            bool wysOk = regexLiczbaCalkowita.IsMatch(strWys);
+            bool promOk = regexLiczbaCalkowita.IsMatch(strProm);
+
+            if (!wysOk || !promOk)
+            {
+                <p style="color: red;">Błąd: Wysokość i promień muszą być dodatnimi liczbami całkowitymi!</p>
+            }
+            else
+            {
+                int h = Convert.ToInt32(strWys);
+                int r = Convert.ToInt32(strProm);
+
+                if (h % 2 != 0)
+                {
+                    <p style="color: red;">Błąd: Wysokość musi być liczbą parzystą!</p>
+                }
+                else
+                {
+                    double V = 0;
+                    double Pc = 0;
+                    string nazwaBryly = "";
+
+                    switch (bryla)
+                    {
+                        case "stozek":
+                            nazwaBryly = "Stożek";
+                            V = (1.0 / 3.0) * Math.PI * Math.Pow(r, 2) * h;
+                            double l = Math.Sqrt(Math.Pow(r, 2) + Math.Pow(h, 2));
+                            Pc = Math.PI * Math.Pow(r, 2) + Math.PI * r * l;
+                            break;
+
+                        case "podwojny_stozek":
+                            nazwaBryly = "Podwójny stożek";
+
+                            double hPolowa = h / 2.0;
+                            V = 2.0 * ((1.0 / 3.0) * Math.PI * Math.Pow(r, 2) * hPolowa);
+                            double lPodw = Math.Sqrt(Math.Pow(r, 2) + Math.Pow(hPolowa, 2));
+                            Pc = 2.0 * Math.PI * r * lPodw;
+                            break;
+
+                        default:
+                            nazwaBryly = "Walec";
+                            V = Math.PI * Math.Pow(r, 2) * h;
+                            Pc = 2.0 * Math.PI * Math.Pow(r, 2) + 2.0 * Math.PI * r * h;
+                            break;
+                    }
+
+                    <h3>Wyniki obliczeń dla: @nazwaBryly</h3>
+                    <table border="1" cellpadding="6" cellspacing="0">
+                        <tr>
+                            <th>Parametr</th>
+                            <th>Wartość</th>
+                        </tr>
+                        <tr>
+                            <td>Wysokość (h)</td>
+                            <td>@h</td>
+                        </tr>
+                        <tr>
+                            <td>Promień (r)</td>
+                            <td>@r</td>
+                        </tr>
+                        <tr>
+                            <td>Pole powierzchni całkowitej (Pp_c)</td>
+                            <td>@Pc.ToString("F2")</td>
+                        </tr>
+                        <tr>
+                            <td>Objętość (V)</td>
+                            <td>@V.ToString("F2")</td>
+                        </tr>
+                    </table>
+                }
+            }
+        }
+    }
+
+</body>
+</html>
