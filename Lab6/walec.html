@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <title>Obliczanie parametrów brył obrotowych</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 60%;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script type="text/javascript">
+        function Oblicz() {
+            // Pobranie wartości z pól tekstowych
+            var rTekst = document.getElementById('promien').value.trim();
+            var hTekst = document.getElementById('wysokosc').value.trim();
+
+            // Wyrażenia regularne:
+            // Promień: dowolna dodatnia liczba całkowita (np. 1, 2, 15)
+            var regexCalkowita = /^[1-9]\d*$/;
+            // Wysokość: dodatnia parzysta liczba całkowita (np. 2, 4, 10, 24)
+            var regexParzysta = /^([2468]|[1-9]\d*[02468])$/;
+
+            if (!regexCalkowita.test(rTekst)) {
+                alert('Promień musi być dodatnią liczbą całkowitą!');
+                return;
+            }
+
+            if (!regexParzysta.test(hTekst)) {
+                alert('Wysokość musi być dodatnią, parzystą liczbą całkowitą!');
+                return;
+            }
+
+            // Konwersja na liczby po pomyślnej walidacji
+            var r = Number(rTekst);
+            var h = Number(hTekst);
+
+            // Odczyt wybranej opcji radio
+            var opcje = document.getElementsByName('bryla');
+            var wybranaBryla = '';
+            for (var i = 0; i < opcje.length; i++) {
+                if (opcje[i].checked) {
+                    wybranaBryla = opcje[i].value;
+                    break;
+                }
+            }
+
+            var nazwaBryly = '';
+            var objetosc = 0;
+            var polePowierzchni = 0;
+            var l = 0; // tworząca stożka
+
+            // Obliczenia w zależności od wybranej bryły
+            switch (wybranaBryla) {
+                case 'walec':
+                    nazwaBryly = 'Walec';
+                    objetosc = Math.PI * Math.pow(r, 2) * h;
+                    polePowierzchni = 2 * Math.PI * r * (r + h);
+                    break;
+
+                case 'stozek':
+                    nazwaBryly = 'Stożek';
+                    l = Math.sqrt(Math.pow(r, 2) + Math.pow(h, 2));
+                    objetosc = (1 / 3) * Math.PI * Math.pow(r, 2) * h;
+                    polePowierzchni = Math.PI * r * (r + l);
+                    break;
+
+                case 'podwojny_stozek':
+                    nazwaBryly = 'Podwójny stożek';
+                    // Podwójny stożek złączony podstawami o łącznej wysokości h (każdy ma wysokość h/2)
+                    var hPol = h / 2;
+                    l = Math.sqrt(Math.pow(r, 2) + Math.pow(hPol, 2));
+                    objetosc = (1 / 3) * Math.PI * Math.pow(r, 2) * h; // 2 * (1/3 * pi * r^2 * (h/2))
+                    polePowierzchni = 2 * Math.PI * r * l; // same powierzchnie boczne (podstawy są wewnątrz)
+                    break;
+            }
+
+            // Dynamiczne tworzenie nowego wiersza i komórek tabeli
+            var tabela = document.getElementById('wynikiTabela');
+            var wiersz = document.createElement('tr');
+
+            var komorkaBryla = document.createElement('td');
+            var komorkaR = document.createElement('td');
+            var komorkaH = document.createElement('td');
+            var komorkaPole = document.createElement('td');
+            var komorkaObjetosc = document.createElement('td');
+
+            // Wypełnienie komórek danymi (zaokrąglenie do 2 miejsc po przecinku)
+            komorkaBryla.innerHTML = nazwaBryly;
+            komorkaR.innerHTML = r;
+            komorkaH.innerHTML = h;
+            komorkaPole.innerHTML = polePowierzchni.toFixed(2);
+            komorkaObjetosc.innerHTML = objetosc.toFixed(2);
+
+            // Dodanie komórek do wiersza, a wiersza do tabeli
+            wiersz.appendChild(komorkaBryla);
+            wiersz.appendChild(komorkaR);
+            wiersz.appendChild(komorkaH);
+            wiersz.appendChild(komorkaPole);
+            wiersz.appendChild(komorkaObjetosc);
+
+            tabela.appendChild(wiersz);
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Kalkulator brył obrotowych</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="promien">Promień (r): </label>
+            <input type="text" id="promien" />
+        </div>
+
+        <div class="form-group">
+            <label for="wysokosc">Wysokość (h): </label>
+            <input type="text" id="wysokosc" />
+        </div>
+
+        <div class="form-group">
+            <strong>Wybierz rodzaj bryły:</strong><br />
+            <input type="radio" id="walec" name="bryla" value="walec" checked="checked" />
+            <label for="walec">Walec</label><br />
+
+            <input type="radio" id="stozek" name="bryla" value="stozek" />
+            <label for="stozek">Stożek</label><br />
+
+            <input type="radio" id="podwojny_stozek" name="bryla" value="podwojny_stozek" />
+            <label for="podwojny_stozek">Podwójny stożek</label>
+        </div>
+
+        <input type="button" value="Oblicz" onclick="Oblicz()" />
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Rodzaj bryły</th>
+                <th>Promień (r)</th>
+                <th>Wysokość (h)</th>
+                <th>Pole powierzchni</th>
+                <th>Objętość</th>
+            </tr>
+        </thead>
+        <tbody id="wynikiTabela">
+            <!-- Kolejne wiersze będą dopisywane tutaj przez JavaScript -->
+        </tbody>
+    </table>
+
+</body>
+</html>

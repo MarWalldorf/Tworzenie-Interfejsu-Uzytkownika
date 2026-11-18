@@ -1,0 +1,103 @@
+﻿<html>
+<head>
+    <title>Gra</title>
+</head>
+<script language="JavaScript">
+    var x = 100, y = 100;
+    var potworX = 250, potworY = 300;
+    var szerokoscTla = 0, wysokoscTla = 0;
+    var rozmiarObiektu = 30;
+    var predkosc = 5;
+    var sekundy = 0;
+    var koniecGry = false;
+    var timerId = null;
+
+    function UstawWymiaryTla() {
+        var imgTlo = new Image();
+        imgTlo.onload = function () {
+            szerokoscTla = this.width;
+            wysokoscTla = this.height;
+            potworY = wysokoscTla - rozmiarObiektu;
+            document.getElementById('potwor').style.top = potworY + 'px';
+        };
+        imgTlo.src = '../grafika/tlo.gif';
+    }
+
+    function OdliczajCzas() {
+        if (koniecGry) return;
+        sekundy++;
+        document.getElementById('timer').innerHTML = 'Czas gry: ' + sekundy + ' s';
+    }
+
+    function SprawdzKolizje() {
+        var dx = x - potworX;
+        var dy = y - potworY;
+        var odleglosc = Math.sqrt(dx * dx + dy * dy);
+
+        if (odleglosc <= 10) {
+            koniecGry = true;
+            clearInterval(timerId);
+            alert("Przegrałeś");
+        }
+    }
+
+    function PrzesunPotwora() {
+        if (potworX < x) potworX += predkosc;
+        else if (potworX > x) potworX -= predkosc;
+
+        if (potworY < y) potworY += predkosc;
+        else if (potworY > y) potworY -= predkosc;
+
+        if (potworX < 0) potworX = 0;
+        if (potworY < 0) potworY = 0;
+        if (szerokoscTla > 0 && potworX > szerokoscTla - rozmiarObiektu) {
+            potworX = szerokoscTla - rozmiarObiektu;
+        }
+        if (wysokoscTla > 0 && potworY > wysokoscTla - rozmiarObiektu) {
+            potworY = wysokoscTla - rozmiarObiektu;
+        }
+
+        document.getElementById('potwor').style.left = potworX + 'px';
+        document.getElementById('potwor').style.top = potworY + 'px';
+    }
+
+    function Przesun() {
+        if (koniecGry) return;
+
+        var ruszylSie = false;
+        switch (event.keyCode) {
+            case 40: y += predkosc; ruszylSie = true; break;
+            case 38: y -= predkosc; ruszylSie = true; break;
+            case 39: x += predkosc; ruszylSie = true; break;
+            case 37: x -= predkosc; ruszylSie = true; break;
+        }
+
+        if (x < 0) x = 0;
+        if (y < 0) y = 0;
+        if (szerokoscTla > 0 && x > szerokoscTla - rozmiarObiektu) {
+            x = szerokoscTla - rozmiarObiektu;
+        }
+        if (wysokoscTla > 0 && y > wysokoscTla - rozmiarObiektu) {
+            y = wysokoscTla - rozmiarObiektu;
+        }
+
+        document.getElementById('bohater').style.left = x + 'px';
+        document.getElementById('bohater').style.top = y + 'px';
+
+        if (ruszylSie) {
+            PrzesunPotwora();
+            SprawdzKolizje();
+        }
+    }
+
+    UstawWymiaryTla();
+    document.onkeydown = Przesun;
+    timerId = window.setInterval('OdliczajCzas()', 1000);
+</script>
+
+<body style="margin:0; background-image: url('../grafika/tlo.gif'); background-repeat: no-repeat;">
+    <div id="timer" style="position:absolute; left:10px; top:10px; background-color:white; padding:5px 10px; font-family:Arial; font-weight:bold; border:1px solid black; z-index:10;">Czas gry: 0 s</div>
+    <img id="bohater" style="position:absolute; left:100px; top:100px; background-color:yellow; width:30px; height:30px;" src="../grafika/bohater.gif">
+    <img id="potwor" style="position:absolute; left:250px; top:300px; width:30px; height:30px;" src="../grafika/potwor.gif">
+</body>
+</html>
