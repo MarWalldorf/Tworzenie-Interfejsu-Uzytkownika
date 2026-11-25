@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Aktualna cena Bitcoin";
+}
+
+<div class="container mt-4">
+    <h2>Aktualny kurs Bitcoin (BTC)</h2>
+    <hr />
+
+    @if (ViewBag.Blad != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Blad</div>
+    }
+    else
+    {
+        <div class="card shadow-sm" style="max-width: 450px;">
+            <div class="card-body">
+                <h5 class="card-title">Bitcoin (BTC)</h5>
+                <p class="card-text fs-4 mb-1">
+                    <strong>@ViewBag.CenaUsd USD</strong>
+                </p>
+                <p class="card-text fs-5 text-muted">
+                    <strong>@ViewBag.CenaPln PLN</strong>
+                </p>
+                <small class="text-secondary">Źródło: Coinbase REST API | Pobrano: @ViewBag.CzasPobrania</small>
+            </div>
+        </div>
+    }
+
+    <div class="mt-3">
+        <a asp-action="Bitcoin" class="btn btn-primary">Odśwież kurs</a>
+        <a asp-action="LLM" class="btn btn-outline-secondary">Przejdź do Gemini LLM</a>
+    </div>
+</div>

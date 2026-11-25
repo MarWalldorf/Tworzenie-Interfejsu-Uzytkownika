@@ -1,0 +1,242 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sklep Komputerowy - Klient JS (CRUD)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            max-width: 450px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 4px;
+                font-weight: bold;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="number"] {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+        button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        #btnPobierz {
+            background-color: #007bff;
+            margin-bottom: 15px;
+        }
+
+            #btnPobierz:hover {
+                background-color: #0056b3;
+            }
+
+        #btnDodaj {
+            background-color: #28a745;
+        }
+
+            #btnDodaj:hover {
+                background-color: #1e7e34;
+            }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #komunikat {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Zarządzanie bazą laptopów (REST API + JavaScript)</h2>
+
+    <div id="komunikat"></div>
+
+    <div class="form-container">
+        <h3>Dodaj nowy laptop</h3>
+        <div class="form-group">
+            <label for="producent">Producent:</label>
+            <input type="text" id="producent" placeholder="np. Acer" required />
+        </div>
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <input type="text" id="model" placeholder="np. Nitro 5" required />
+        </div>
+        <div class="form-group">
+            <label for="pamiecRamGB">Pamięć RAM (GB):</label>
+            <input type="number" id="pamiecRamGB" placeholder="np. 16" required />
+        </div>
+        <div class="form-group">
+            <label for="cena">Cena (PLN):</label>
+            <input type="number" step="0.01" id="cena" placeholder="np. 3999.99" required />
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="czyDostepny" checked /> Dostępny w magazynie
+            </label>
+        </div>
+        <button type="button" id="btnDodaj">Dodaj</button>
+    </div>
+
+
+    <button type="button" id="btnPobierz">Pobierz</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producent</th>
+                <th>Model</th>
+                <th>RAM (GB)</th>
+                <th>Cena (PLN)</th>
+                <th>Dostępny</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaLaptopy">
+        </tbody>
+    </table>
+
+    <script>
+        const apiUrl = 'http://localhost:5214/api/Laptopy';
+        const tabelaBody = document.getElementById('tabelaLaptopy');
+        const komunikatDiv = document.getElementById('komunikat');
+
+
+        async function pobierzDane() {
+            komunikatDiv.textContent = '';
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Błąd HTTP: ${response.status}`);
+                }
+
+                const laptopy = await response.json();
+                tabelaBody.innerHTML = '';
+
+                laptopy.forEach(laptop => {
+                    const wiersz = document.createElement('tr');
+                    wiersz.innerHTML = `
+                        <td>${laptop.id}</td>
+                        <td>${laptop.producent}</td>
+                        <td>${laptop.model}</td>
+                        <td>${laptop.pamiecRamGB}</td>
+                        <td>${laptop.cena.toFixed(2)}</td>
+                        <td>${laptop.czyDostepny ? 'Tak' : 'Nie'}</td>
+                    `;
+                    tabelaBody.appendChild(wiersz);
+                });
+            } catch (error) {
+                komunikatDiv.textContent = 'Nie udało się pobrać danych: ' + error.message;
+            }
+        }
+
+        async function dodajRekord() {
+            komunikatDiv.textContent = '';
+
+            const producent = document.getElementById('producent').value.trim();
+            const model = document.getElementById('model').value.trim();
+            const pamiecRamGB = parseInt(document.getElementById('pamiecRamGB').value, 10);
+            const cena = parseFloat(document.getElementById('cena').value);
+            const czyDostepny = document.getElementById('czyDostepny').checked;
+
+            if (!producent || !model || isNaN(pamiecRamGB) || isNaN(cena)) {
+                komunikatDiv.textContent = 'Wypełnij poprawnie wszystkie pola formularza!';
+                return;
+            }
+
+            const nowyLaptop = {
+                id: 0,
+                producent: producent,
+                model: model,
+                pamiecRamGB: pamiecRamGB,
+                cena: cena,
+                czyDostepny: czyDostepny
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(nowyLaptop)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Błąd zapisu: ${response.status}`);
+                }
+
+                document.getElementById('producent').value = '';
+                document.getElementById('model').value = '';
+                document.getElementById('pamiecRamGB').value = '';
+                document.getElementById('cena').value = '';
+                document.getElementById('czyDostepny').checked = true;
+
+                await pobierzDane();
+            } catch (error) {
+                komunikatDiv.textContent = 'Błąd podczas dodawania rekordu: ' + error.message;
+            }
+        }
+
+        document.getElementById('btnPobierz').addEventListener('click', pobierzDane);
+        document.getElementById('btnDodaj').addEventListener('click', dodajRekord);
+    </script>
+
+</body>
+</html>

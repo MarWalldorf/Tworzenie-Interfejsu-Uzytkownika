@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Google Gemini LLM";
+}
+
+<div class="container mt-4">
+    <h2>Asystent AI (Google Gemini API)</h2>
+    <hr />
+
+    <form asp-action="LLM" method="post">
+        <div class="mb-3">
+            <label for="prompt" class="form-label">Wpisz swój prompt:</label>
+            <textarea class="form-control" id="prompt" name="prompt" rows="4" placeholder="Np. Napisz krótki opis zalet dysków SSD NVMe...">@ViewBag.Prompt</textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Wyślij do Gemini</button>
+        <a asp-action="Bitcoin" class="btn btn-outline-secondary">Sprawdź kurs Bitcoin</a>
+    </form>
+
+    @if (ViewBag.Blad != null)
+    {
+        <div class="alert alert-danger mt-4">@ViewBag.Blad</div>
+    }
+
+    @if (ViewBag.Odpowiedz != null)
+    {
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-light">
+                <strong>Odpowiedź modelu Gemini:</strong>
+            </div>
+            <div class="card-body">
+                <p class="card-text" style="white-space: pre-wrap;">@ViewBag.Odpowiedz</p>
+            </div>
+        </div>
+    }
+</div>
